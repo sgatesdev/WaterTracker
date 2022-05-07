@@ -41,6 +41,16 @@
         #total-unit-type {
             cursor: pointer;
         }
+
+        footer {
+            font-size: 8pt;
+            text-align: center;
+        }
+
+        #reset {
+            cursor: pointer;
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -51,10 +61,11 @@
         </div>
         <div id="middle">
             <!--only display gallons or liters-->
-            <p id="total">2</p>
+            <p id="total"></p>
             <h1 id="total-unit">
-                <span id="total-unit-type"></span><span id="plural">s</span>
+                <span id="total-unit-type"></span>(s)
             </h1>
+            <h5>Consumed today</h5>
         </div>
         <div style="padding: 10px;">
             <input type="number" id="number-units" placeholder="Enter number" />
@@ -64,6 +75,18 @@
             <p id="error"></p>
         </div>
     </main>
+    <footer>
+        <p>
+            The total you see tracks your water consumption over a 24 hour period, beginning at 0000 hours (12:00 AM)
+            and
+            ending at 2359 hours (11:59 PM).
+        </p>
+        <p>
+            The app automatically resets at the end of each day. All you have to do is
+            enter the amounts, and you can easily see how much water you are drinking!
+        </p>
+        <p id="reset">Reset</p>
+    </footer>
 </body>
 <script type="application/javascript" src="index.js"></script>
 
