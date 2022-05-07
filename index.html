@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Water tracker</title>
     <style>
         main {
@@ -14,19 +13,19 @@
             margin: 0px;
 
             display: grid;
-            grid-template-rows: min-content auto min-content;
+            grid-template-rows: 80px 400px min-content;
 
-            background-color: rgb(8, 114, 81);
+            background-color: #35a0a4;
         }
 
         main div {
             text-align: center;
+            color: whitesmoke;
         }
 
         div#middle {
-            border: 1px solid black;
-            background-color: rgb(32, 44, 255);
-            color: white;
+            border: 1px solid #184e77;
+            background-color: #1e6091;
             font-weight: bold;
         }
 
@@ -34,22 +33,35 @@
             font-size: 72pt;
         }
 
-        #plural {
-            display: none;
+        #middle {
+            cursor: pointer;
         }
 
-        #total-unit-type {
-            cursor: pointer;
+        #form {
+            display: flex;
+            align-items: middle;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        #form * {
+            margin-right: 5px;
         }
 
         footer {
             font-size: 8pt;
             text-align: center;
+            align-items: middle;
         }
 
         #reset {
             cursor: pointer;
             text-decoration: underline;
+        }
+
+        #error {
+            display: none;
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -60,26 +72,26 @@
             <h1>Water Tracker</h1>
         </div>
         <div id="middle">
-            <!--only display gallons or liters-->
             <p id="total"></p>
             <h1 id="total-unit">
                 <span id="total-unit-type"></span>(s)
             </h1>
             <h5>Consumed today</h5>
         </div>
-        <div style="padding: 10px;">
-            <input type="text" size="3" id="number-units" placeholder="#" />
-            <select id="type-units">
-            </select>
-            <button id="add-btn">Add!</button>
-            <p id="error"></p>
+        <div id="bottom">
+            <div id="form">
+                <input type="text" size="3" id="number-units" placeholder="#" />
+                <select id="type-units">
+                </select>
+                <button id="add-btn">Add!</button>
+            </div>
+            <span id="error"></span>
         </div>
     </main>
     <footer>
         <p>
             The total you see tracks your water consumption over a 24 hour period, beginning at 0000 hours (12:00 AM)
-            and
-            ending at 2359 hours (11:59 PM).
+            and ending at 2359 hours (11:59 PM).
         </p>
         <p>
             The app automatically resets at the end of each day. All you have to do is
