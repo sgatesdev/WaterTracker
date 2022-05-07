@@ -71,18 +71,20 @@ function displayTodaysTotal() {
 function addWater() {
     let errorEl = document.querySelector('#error');
     let unit = document.querySelector('#type-units').value;
-    let numberUnits = document.querySelector('#number-units').value;
+    let numberUnits = parseFloat(document.querySelector('#number-units').value);
 
-    if (!numberUnits || isNaN(parseFloat(numberUnits))) {
-        document.querySelector('#error').innerHTML = 'Please enter a valid number!';
+    if (!numberUnits || isNaN(numberUnits) || numberUnits <= 0) {
+        errorEl.style.display = 'inline';
+        errorEl.innerHTML = 'Please enter a valid number.';
         return;
     }
 
     // reset 
+    errorEl.style.display = 'none';
     errorEl.innerHTML = '';
 
     // convert input to ML and add to total
-    let millileters = options[unit] * parseFloat(numberUnits);
+    let millileters = options[unit] * numberUnits;
     waterData[today] += millileters;
 
     // update local storage
