@@ -43,6 +43,9 @@ function buildUI() {
         else totalUnit = 'Liter';
         displayTodaysTotal();
     });
+
+    // add reset option at bottom
+    document.querySelector('#reset').addEventListener('click', resetCount);
 }
 
 function displayTodaysTotal() {
@@ -55,14 +58,6 @@ function displayTodaysTotal() {
     let formattedData = Number(todaysTotal).toFixed(2);
 
     document.querySelector('#total').innerHTML = formattedData;
-
-    let pluralEl = document.querySelector('#plural');
-    if (formattedData > 1) {
-        pluralEl.style.display = 'inline';
-    }
-    else if (pluralEl.style.display) {
-        pluralEl.style.removeProperty('display');
-    }
 }
 
 function addWater() {
@@ -89,7 +84,17 @@ function addWater() {
     displayTodaysTotal();
 }
 
+function resetCount() {
+    if (waterData[today]) delete waterData[today];
+    else return;
+
+    localStorage.setItem(lsKey, JSON.stringify(waterData));
+
+    displayTodaysTotal();
+}
+
 function getTodaysTotal() {
+    if (!waterData[today]) waterData[today] = 0;
     return waterData[today];
 }
 
