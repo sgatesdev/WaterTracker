@@ -37,7 +37,7 @@ function buildUI() {
     totalUnit = lsTotalUnit || 'Liter';
 
     // add ability to toggle display between L and G
-    let totalDisplayToggle = document.querySelector('#total-unit');
+    let totalDisplayToggle = document.querySelector('#middle');
     totalDisplayToggle.addEventListener('click', () => {
         if (totalUnit === 'Liter') totalUnit = 'Gallon';
         else totalUnit = 'Liter';
