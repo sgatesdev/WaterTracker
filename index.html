@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water tracker!</title>
+    <style>
+        main {
+            height: 97vh;
+            width: 97vw;
+            margin: 0px;
+
+            display: grid;
+            grid-template-rows: min-content auto 50px;
+        }
+
+        main div {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        div#middle p {
+            font-size: 72pt;
+        }
+
+        #plural {
+            display: none;
+        }
+
+        #total-unit-type {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div>
+            <h1>Water Tracker!</h1>
+        </div>
+        <div id="middle">
+            <!--only display gallons or liters-->
+            <p id="total">2</p>
+            <h3 id="total-unit">
+                <span id="total-unit-type"></span><span id="plural">s</span>
+            </h3>
+        </div>
+        <div>
+            <input type="text" id="number-units" placeholder="Enter number" />
+            <select id="type-units">
+            </select>
+            <button id="add-btn">Add!</button>
+        </div>
+    </main>
+</body>
+<script type="application/javascript" src="index.js"></script>
+
+</html>
