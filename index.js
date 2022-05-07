@@ -4,8 +4,10 @@
 let options = {
     'Liter': 1000,
     'Millileter': 1,
+    'Gallon': 3785.41,
+    'Pint': 568.261,
     'Cup': 236.588,
-    'Gallon': 3785.41 
+    'fl oz': 29.5735,
 };
 
 let lsTrackerData = 'water-tracker-data';
