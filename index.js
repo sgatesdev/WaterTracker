@@ -8,7 +8,8 @@ let options = {
     'Gallon': 3785.41 
 };
 
-let lsKey = 'water-tracker-data';
+let lsTrackerData = 'water-tracker-data';
+let lsTrackerDisplayUnit = 'water-tracker-display';
 let waterData = {};
 let today = getCurrentDateString();
 let totalUnit;
@@ -33,14 +34,21 @@ function buildUI() {
     button.addEventListener('click', addWater);
     
     // get unit to display total 
-    let lsTotalUnit = localStorage.getItem('water-tracker-display');
-    totalUnit = lsTotalUnit || 'Liter';
+    let lsTotalUnit = localStorage.getItem(lsTrackerDisplayUnit);
+    if (!lsTotalUnit) {
+        totalUnit = 'Liter';
+        setTotalUnit(totalUnit);
+    }
+    else {
+        totalUnit = lsTotalUnit;
+    }
 
     // add ability to toggle display between L and G
     let totalDisplayToggle = document.querySelector('#middle');
     totalDisplayToggle.addEventListener('click', () => {
         if (totalUnit === 'Liter') totalUnit = 'Gallon';
         else totalUnit = 'Liter';
+        setTotalUnit(totalUnit);
         displayTodaysTotal();
     });
 
@@ -78,7 +86,7 @@ function addWater() {
     waterData[today] += millileters;
 
     // update local storage
-    localStorage.setItem(lsKey, JSON.stringify(waterData));
+    localStorage.setItem(lsTrackerData, JSON.stringify(waterData));
 
     // refresh display
     displayTodaysTotal();
@@ -88,7 +96,7 @@ function resetCount() {
     if (waterData[today]) delete waterData[today];
     else return;
 
-    localStorage.setItem(lsKey, JSON.stringify(waterData));
+    localStorage.setItem(lsTrackerData, JSON.stringify(waterData));
 
     displayTodaysTotal();
 }
@@ -104,7 +112,11 @@ function getCurrentDateString() {
 }
 
 function fetchWaterData() {
-    let data = localStorage.getItem(lsKey);
+    let data = localStorage.getItem(lsTrackerData);
     if (data) waterData = JSON.parse(data);
     else waterData[today] = 0;
+}
+
+function setTotalUnit(type) {
+    localStorage.setItem(lsTrackerDisplayUnit, type);
 }
