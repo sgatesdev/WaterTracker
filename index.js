@@ -50,24 +50,36 @@ function displayTodaysTotal() {
     let totalUnitType= document.querySelector('#total-unit-type');
     totalUnitType.innerHTML = totalUnit;
 
-    if (getTodaysTotal() > 1) {
-        document.querySelector('#plural').style.display = 'inline';
-    }
-
     // calculate total based on display unit type (G or L) and display
     let todaysTotal = getTodaysTotal() / options[totalUnit];
     let formattedData = Number(todaysTotal).toFixed(2);
+
     document.querySelector('#total').innerHTML = formattedData;
+
+    let pluralEl = document.querySelector('#plural');
+    if (formattedData > 1) {
+        pluralEl.style.display = 'inline';
+    }
+    else if (pluralEl.style.display) {
+        pluralEl.style.removeProperty('display');
+    }
 }
 
 function addWater() {
+    let errorEl = document.querySelector('#error');
     let unit = document.querySelector('#type-units').value;
     let numberUnits = document.querySelector('#number-units').value;
 
-    if (!numberUnits) return alert('Enter a valid number!');
+    if (!numberUnits || isNaN(parseFloat(numberUnits))) {
+        document.querySelector('#error').innerHTML = 'Please enter a valid number!';
+        return;
+    }
+
+    // reset 
+    errorEl.innerHTML = '';
 
     // convert input to ML and add to total
-    let millileters = options[unit] * numberUnits;
+    let millileters = options[unit] * parseFloat(numberUnits);
     waterData[today] += millileters;
 
     // update local storage
