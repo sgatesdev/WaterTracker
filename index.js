@@ -15,6 +15,7 @@ let lsTrackerDisplayUnit = 'water-tracker-display';
 let waterData = {};
 let today = getCurrentDateString();
 let totalUnit;
+let totalUnitIndex = 0;
 
 init();
 
@@ -48,8 +49,17 @@ function buildUI() {
     // add ability to toggle display between L and G
     let totalDisplayToggle = document.querySelector('#middle');
     totalDisplayToggle.addEventListener('click', () => {
-        if (totalUnit === 'Liter') totalUnit = 'Gallon';
-        else totalUnit = 'Liter';
+        // go to next unit 
+        totalUnitIndex++;
+
+        // make sure we stay within bounds of available units
+        let optionKeyArray = Object.keys(options);        
+        if (totalUnitIndex >= optionKeyArray.length) {
+            totalUnitIndex = 0;
+        }
+
+        // set display type 
+        totalUnit = optionKeyArray[totalUnitIndex];
         setTotalUnit(totalUnit);
         displayTodaysTotal();
     });
