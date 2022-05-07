@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Water tracker!</title>
+    <title>Water tracker</title>
     <style>
         main {
             height: 97vh;
@@ -13,12 +13,15 @@
             margin: 0px;
 
             display: grid;
-            grid-template-rows: min-content auto 50px;
+            grid-template-rows: min-content auto min-content;
         }
 
         main div {
-            border: 1px solid black;
             text-align: center;
+        }
+
+        div#middle {
+            border: 1px solid black;
         }
 
         div#middle p {
@@ -38,16 +41,16 @@
 <body>
     <main>
         <div>
-            <h1>Water Tracker!</h1>
+            <h1>Water Tracker</h1>
         </div>
         <div id="middle">
             <!--only display gallons or liters-->
             <p id="total">2</p>
-            <h3 id="total-unit">
+            <h1 id="total-unit">
                 <span id="total-unit-type"></span><span id="plural">s</span>
-            </h3>
+            </h1>
         </div>
-        <div>
+        <div style="padding: 10px;">
             <input type="text" id="number-units" placeholder="Enter number" />
             <select id="type-units">
             </select>

@@ -1,8 +1,9 @@
 // water tracker app 
 
+// ML's are used as base unit for all calculations
 let options = {
-    'Millileter': 1,
     'Liter': 1000,
+    'Millileter': 1,
     'Cup': 236.588,
     'Gallon': 3785.41 
 };
@@ -35,12 +36,45 @@ function buildUI() {
     let lsTotalUnit = localStorage.getItem('water-tracker-display');
     totalUnit = lsTotalUnit || 'Liter';
 
-    let totalDisplayToggle = document.querySelector('#total-unit-type');
+    // add ability to toggle display between L and G
+    let totalDisplayToggle = document.querySelector('#total-unit');
     totalDisplayToggle.addEventListener('click', () => {
         if (totalUnit === 'Liter') totalUnit = 'Gallon';
         else totalUnit = 'Liter';
         displayTodaysTotal();
     });
+}
+
+function displayTodaysTotal() {
+    // display type of unit below total number
+    let totalUnitType= document.querySelector('#total-unit-type');
+    totalUnitType.innerHTML = totalUnit;
+
+    if (getTodaysTotal() > 1) {
+        document.querySelector('#plural').style.display = 'inline';
+    }
+
+    // calculate total based on display unit type (G or L) and display
+    let todaysTotal = getTodaysTotal() / options[totalUnit];
+    let formattedData = Number(todaysTotal).toFixed(2);
+    document.querySelector('#total').innerHTML = formattedData;
+}
+
+function addWater() {
+    let unit = document.querySelector('#type-units').value;
+    let numberUnits = document.querySelector('#number-units').value;
+
+    if (!numberUnits) return alert('Enter a valid number!');
+
+    // convert input to ML and add to total
+    let millileters = options[unit] * numberUnits;
+    waterData[today] += millileters;
+
+    // update local storage
+    localStorage.setItem(lsKey, JSON.stringify(waterData));
+
+    // refresh display
+    displayTodaysTotal();
 }
 
 function getTodaysTotal() {
@@ -56,33 +90,4 @@ function fetchWaterData() {
     let data = localStorage.getItem(lsKey);
     if (data) waterData = JSON.parse(data);
     else waterData[today] = 0;
-}
-
-function displayTodaysTotal() {
-    // set up total unit toggle
-    let totalDisplayToggle = document.querySelector('#total-unit-type');
-    totalDisplayToggle.innerHTML = totalUnit;
-
-    if (getTodaysTotal() > 1) {
-        document.querySelector('#plural').style.display = 'inline';
-    }
-
-    let todaysTotal = getTodaysTotal() / options[totalUnit];
-    let formattedData = Number(todaysTotal).toFixed(2);
-    document.querySelector('#total').innerHTML = formattedData;
-}
-
-function addWater() {
-    let unit = document.querySelector('#type-units').value;
-    let numberUnits = document.querySelector('#number-units').value;
-
-    console.log(unit, numberUnits)
-    if (!numberUnits) return alert('Enter a valid number!');
-
-    let millileters = options[unit] * numberUnits;
-    waterData[today] += millileters;
-    console.log(waterData)
-    localStorage.setItem(lsKey, JSON.stringify(waterData));
-
-    displayTodaysTotal();
 }
