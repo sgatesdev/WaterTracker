@@ -54,14 +54,23 @@
             align-items: middle;
         }
 
-        #reset {
-            cursor: pointer;
-            text-decoration: underline;
-        }
-
         #error {
             display: none;
             margin-bottom: 5px;
+        }
+
+        footer button {
+            border-radius: 5px;
+            font-size: 8pt;
+            margin: 5px;
+        }
+
+        #div-about {
+            display: none;
+        }
+
+        #div-about[data-show="true"] {
+            display: inline;
         }
     </style>
 </head>
@@ -76,11 +85,11 @@
             <h1 id="total-unit">
                 <span id="total-unit-type"></span>(s)
             </h1>
-            <h5>Consumed today</h5>
+            <h5>Consumed today - Tap to Change</h5>
         </div>
         <div id="bottom">
             <div id="form">
-                <input type="text" size="3" id="number-units" placeholder="#" />
+                <input type="number" size="3" id="number-units" placeholder="#" style="width: 50px" />
                 <select id="type-units">
                 </select>
                 <button id="add-btn">Add!</button>
@@ -89,15 +98,18 @@
         </div>
     </main>
     <footer>
+        <div id="div-about" data-show="false">
+            <p>
+                The total tracks daily water consumption from 12:00AM to 11:59PM<br>
+                US standard units are used for gallons, cups, etc.<br>
+                The app automatically resets at the end of each day<br>
+            </p>
+        </div>
         <p>
-            The total you see tracks your water consumption over a 24 hour period, beginning at 0000 hours (12:00 AM)
-            and ending at 2359 hours (11:59 PM).
+            <button id="btn-about">About</button>
+            <button id="btn-reset">Reset</button>
         </p>
-        <p>
-            The app automatically resets at the end of each day. All you have to do is
-            enter the amounts, and you can easily see how much water you are drinking!
-        </p>
-        <p id="reset">Reset</p>
+        <p>Copyright &copy; <a href="https://samgates.io/">https://samgates.io/</a></p>
     </footer>
 </body>
 <script type="application/javascript" src="index.js"></script>

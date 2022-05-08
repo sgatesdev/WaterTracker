@@ -5,8 +5,8 @@ let options = {
     'Liter': 1000,
     'Millileter': 1,
     'Gallon': 3785.41,
-    'Pint': 568.261,
-    'Cup': 236.588,
+    'Pint': 473.176,
+    'Cup': 240,
     'fl oz': 29.5735,
 };
 
@@ -38,13 +38,8 @@ function buildUI() {
     
     // get unit to display total 
     let lsTotalUnit = localStorage.getItem(lsTrackerDisplayUnit);
-    if (!lsTotalUnit) {
-        totalUnit = 'Liter';
-        setTotalUnit(totalUnit);
-    }
-    else {
-        totalUnit = lsTotalUnit;
-    }
+    totalUnit = lsTotalUnit ? lsTotalUnit : 'Liter';
+    setTotalUnit(totalUnit);
 
     // add ability to toggle display between L and G
     let totalDisplayToggle = document.querySelector('#middle');
@@ -65,7 +60,13 @@ function buildUI() {
     });
 
     // add reset option at bottom
-    document.querySelector('#reset').addEventListener('click', resetCount);
+    document.querySelector('#btn-reset').addEventListener('click', resetCount);
+
+    // add toggle to show or hide app info
+    document.querySelector('#btn-about').addEventListener('click', () => {
+        let aboutDiv = document.querySelector('#div-about');
+        aboutDiv.dataset.show = aboutDiv.dataset.show === 'false';
+    });
 }
 
 function displayTodaysTotal() {
@@ -107,8 +108,12 @@ function addWater() {
 }
 
 function resetCount() {
-    if (waterData[today]) delete waterData[today];
-    else return;
+    if (waterData[today]) {
+        delete waterData[today];
+    }
+    else {
+        return;
+    }
 
     localStorage.setItem(lsTrackerData, JSON.stringify(waterData));
 
@@ -116,7 +121,10 @@ function resetCount() {
 }
 
 function getTodaysTotal() {
-    if (!waterData[today]) waterData[today] = 0;
+    if (!waterData[today]) {
+        waterData[today] = 0;
+    }
+
     return waterData[today];
 }
 
@@ -132,5 +140,6 @@ function fetchWaterData() {
 }
 
 function setTotalUnit(type) {
+    totalUnitIndex = Object.keys(options).indexOf(type);
     localStorage.setItem(lsTrackerDisplayUnit, type);
 }
