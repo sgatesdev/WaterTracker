@@ -8,9 +8,11 @@
 
 Easily track your daily water intake using Water Tracker!
 
-See how the project was built [here](https://samgates.io/blog/app-project/water-tracker/).
+Water Tracker allows you to track your daily water intake in the most commonly used standard (US) or metric units. Mixing and matching is encouraged. The total accumulates over a 24 hour period and automatically resets at midnight. Clicking or tapping the blue square switches what unit the total displays in (gallons, liters, etc.). No user account necessary - your data stays on your device.
 
-Check out the deployed version [here](https://samgates.io/projects/water-tracker/).
+Add it to your phone's home screen for quick access. Note: The iPhone home screen icon will preview the last state of the browser window, so you can actually see in the Water Tracker icon what your current total is.
+
+Click to see a [blog post](https://samgates.io/blog/app-project/water-tracker/) about how the project was built and to access the [deployed version](https://samgates.io/projects/water-tracker/).
 
 ## License
 
